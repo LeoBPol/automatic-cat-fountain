@@ -1,149 +1,206 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-	<script type="text/javascript" src="javascripts/onload.js"></script>
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
-	<title>Automatic cat fountain</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <script type="text/javascript" src="javascripts/onload.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <title>Automatic cat fountain</title>
 </head>
 <body>
 
-	<header>
-		<div>
-			<img src="/images/logo.jpg" id="logo">
-			<p id="logo-text">Fontaine à eau pour chat automatisée</p>
-		</div>
+<header>
+    <div>
+        <img src="/images/logo.jpg" id="logo">
+        <p id="logo-text">Fontaine à eau pour chat automatisée</p>
+    </div>
 
 
-	</header>
+</header>
 
-	<% console.log("days") %>
-	<% console.log(days) %>
+<% console.log("days") %>
+<% console.log(days) %>
 
-	<main>
-		<div id="container">
-			<div class="container chart" style="right: 0">
-				<label>Nombre d'activation de la fontaine par jour</label>
-				<div class="row">
-					<div class="col-12">
-						<div class="card">
-							<div class="card-body">
-								<canvas id="activation"></canvas>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+<main>
+    <div id="container">
+        <div class="container chart" style="right: 0">
+            <label>Nombre d'activation de la fontaine par jour</label>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <canvas id="activation"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="container chart" style="right: 0">
-				<label>Nombre d'activation de la fontaine par jour</label>
-				<div class="row">
-					<div class="col-12">
-						<div class="card">
-							<div class="card-body">
-								<canvas id="needOfWater"></canvas>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</main>
+        <div class="container chart" style="right: 0">
+            <label>Nombre d'activation de la fontaine par jour</label>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <canvas id="needOfWater"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-	<%
-		let activation = Array(days.length).fill(0)
-		let needOfWater = Array(days.length).fill(0)
-		let firstDayLetter = Array(days.length).fill("")
-		for (var i = 0; i < days.length; i++) {
-			activation[i] = days[i].activation
-			needOfWater[i] = days[i].needOfWater
-			firstDayLetter[i] = moment(days[i].date).format("ddd DD/MM")
-		}
+    <div class="container container-perso">
+        <form class="row">
+            <div class="col-sm">
+                <label>Entrez une ou plusieurs adresses mail pour recevoir un mail lorsqu'il faut remplir la
+                    fontaine. </label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">E-mail</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+            <div class="col-sm" style="flex-grow:1;position: relative">
+                <div class="mb-2" style="position: absolute;left: 0;right: 0;bottom: 0;top: 0">
+                    <label>Email recevant déjà le rappel</label>
+                    <% console.log(emails.length) %>
+                    <ul class="list-group" style="margin-left: 10%; margin-right: 10%">
+                        <% for(var i = 0; i < emails.length; i++) { %>
+                            <li id="<%= emails[i]._id %>" class="list-group-item" value="<%= emails[i]._id %>">
+                                <span id="deleteJury" class="fa fa-times" onclick="test('<%= emails[i]._id %>')"
+                                      style="margin-right: 3%"></span>
+                                <%= emails[i].email %>
+                            </li>
+                        <% } %>
 
-		console.log(activation)
-		console.log(needOfWater)
-		console.log(firstDayLetter)
+                        <script>
+                            function deletion(id) {
+                                $.ajax({
+                                    type: 'DELETE',
+                                    url: '/manageEmail?emailID=' + id,
+                                    success: (data) => {
+                                        console.log(data);
+                                    },
+                                    error: (err) => {
+                                        console.log(err);
+                                    }
+                                });
+                                document.getElementById(id).setAttribute('style', 'display: none')
+                            }
+                        </script>
 
- 	%>
+                    </ul>
+                </div>
+            </div>
 
-	<script type="text/javascript">
-		let activationChart = document.getElementById("activation");
-		let needOfWaterChart = document.getElementById("needOfWater");
+        </form>
+    </div>
+</main>
 
-		console.log('<%= firstDayLetter %>')
-		console.log('<%= activation %>')
-		console.log('<%= needOfWater %>')
+<%
+let activation = Array(days.length).fill(0)
+let needOfWater = Array(days.length).fill(0)
+let firstDayLetter = Array(days.length).fill("")
+for (var i = 0; i < days.length; i++) {
+    activation[i] = days[i].activation
+    needOfWater[i] = days[i].needOfWater
+    firstDayLetter[i] = moment(days[i].date).format("ddd DD/MM")
+}
 
-		let activationChartData = {
-  			labels: '<%= firstDayLetter %>'.split(','),
-  			datasets: [{
-    			data: '<%= activation %>'.split(','),
-  			}]
-		};
-		let needOfWaterChartData = {
-  			labels: '<%= firstDayLetter %>'.split(','),
-  			datasets: [{
-    			data: '<%= needOfWater %>'.split(','),
-  			}]
-		};
+console.log(activation)
+console.log(needOfWater)
+console.log(firstDayLetter)
+%>
 
-		if (activationChart) {
- 			new Chart(activationChart, {
-  				type: 'line',
-  				data: activationChartData,
-  				options: {
-    				scales: {
-      					yAxes: [{
-        					ticks: {
-         						beginAtZero: true
-        					}
-      					}]
-    				},
-    				legend: {
-      					display: true,
-						labels: [{
-							fontColor: 'rgb(255, 99, 132)'
-						}]
-    				}
-  				}
-  			});
-		}
+<script type="text/javascript">
+    let activationChart = document.getElementById("activation");
+    let needOfWaterChart = document.getElementById("needOfWater");
 
-		if (needOfWaterChart) {
-			new Chart(needOfWaterChart, {
-				type: 'line',
-				data: needOfWaterChartData,
-				options: {
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero: true,
-								stepSize: 1
-							}
-						}]
-					},
-					legend: {
-						display: true,
-						labels: [{
-							fontColor: 'rgb(255, 99, 132)'
-						}]
-					}
-				}
-			});
-		}
-	</script>
+    console.log('<%= firstDayLetter %>')
+    console.log('<%= activation %>')
+    console.log('<%= needOfWater %>')
+
+    let activationChartData = {
+        labels: '<%= firstDayLetter %>'.split(','),
+        datasets: [{
+            data: '<%= activation %>'.split(','),
+        }]
+    };
+    let needOfWaterChartData = {
+        labels: '<%= firstDayLetter %>'.split(','),
+        datasets: [{
+            data: '<%= needOfWater %>'.split(','),
+        }]
+    };
+
+    if (activationChart) {
+        new Chart(activationChart, {
+            type: 'line',
+            data: activationChartData,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                legend: {
+                    display: true,
+                    labels: [{
+                        fontColor: 'rgb(255, 99, 132)'
+                    }]
+                }
+            }
+        });
+    }
+
+    if (needOfWaterChart) {
+        new Chart(needOfWaterChart, {
+            type: 'line',
+            data: needOfWaterChartData,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
+                    }]
+                },
+                legend: {
+                    display: true,
+                    labels: [{
+                        fontColor: 'rgb(255, 99, 132)'
+                    }]
+                }
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
+

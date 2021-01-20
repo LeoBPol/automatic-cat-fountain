@@ -46,4 +46,13 @@ header{
 	flex-direction: row;            /* default value; can be omitted */
 	flex-wrap: nowrap;              /* default value; can be omitted */
 	justify-content: space-between; /* switched from default (flex-start, see below) */
+	width: 100%;
+}
+form{
+	margin: 1% 5%;
+}
+.container-perso{
+	width: 100%;
+	margin-right: 0;
+	margin-left: 0;
 }
