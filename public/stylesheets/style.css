@@ -1,0 +1,49 @@
+body{
+	background-color: #ECECEC;
+	font-family: "Roboto", sans-serif;
+	font-weight: 300;
+	font-size: 1.2rem;
+  	margin: 0;
+  	height: 100vh;
+  	overflow-y: hidden;
+}
+main{
+    width: 96%;
+    height: 85%;
+    margin: 2%;
+    border-radius: .5em;
+    background-color: white;
+}
+header{
+	position: relative;
+	height: 8%;
+	background-color: white;
+	box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+	vertical-align: middle;
+}
+#logo{
+	position: absolute;
+	height: 80%;
+	top: 10%;
+	left: -10%;
+}
+#logo-text{
+	margin-left: 5%;
+	font-family: "Roboto", sans-serif;
+	font-weight: 500;
+	font-size: 2rem;
+	position: absolute;
+	transform: translateY(-50%);
+	top: 50%;
+}
+.chart{
+	padding-top: 15px;
+	margin-right: 0;
+	margin-left: 0;
+}
+#container {
+	display: flex;                  /* establish flex container */
+	flex-direction: row;            /* default value; can be omitted */
+	flex-wrap: nowrap;              /* default value; can be omitted */
+	justify-content: space-between; /* switched from default (flex-start, see below) */
+}

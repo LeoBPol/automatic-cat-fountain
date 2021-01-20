@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<script type="text/javascript" src="javascripts/onload.js"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+	<title>Automatic cat fountain</title>
+</head>
+<body>
+
+	<header>
+		<div>
+			<img src="/images/logo.jpg" id="logo">
+			<p id="logo-text">Fontaine à eau pour chat automatisée</p>
+		</div>
+
+
+	</header>
+
+	<% console.log("days") %>
+	<% console.log(days) %>
+
+	<main>
+		<div id="container">
+			<div class="container chart" style="right: 0">
+				<label>Nombre d'activation de la fontaine par jour</label>
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								<canvas id="activation"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container chart" style="right: 0">
+				<label>Nombre d'activation de la fontaine par jour</label>
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								<canvas id="needOfWater"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+
+	<%
+		let activation = Array(days.length).fill(0)
+		let needOfWater = Array(days.length).fill(0)
+		let firstDayLetter = Array(days.length).fill("")
+		for (var i = 0; i < days.length; i++) {
+			activation[i] = days[i].activation
+			needOfWater[i] = days[i].needOfWater
+			firstDayLetter[i] = moment(days[i].date).format("ddd DD/MM")
+		}
+
+		console.log(activation)
+		console.log(needOfWater)
+		console.log(firstDayLetter)
+
+ 	%>
+
+	<script type="text/javascript">
+		let activationChart = document.getElementById("activation");
+		let needOfWaterChart = document.getElementById("needOfWater");
+
+		console.log('<%= firstDayLetter %>')
+		console.log('<%= activation %>')
+		console.log('<%= needOfWater %>')
+
+		let activationChartData = {
+  			labels: '<%= firstDayLetter %>'.split(','),
+  			datasets: [{
+    			data: '<%= activation %>'.split(','),
+  			}]
+		};
+		let needOfWaterChartData = {
+  			labels: '<%= firstDayLetter %>'.split(','),
+  			datasets: [{
+    			data: '<%= needOfWater %>'.split(','),
+  			}]
+		};
+
+		if (activationChart) {
+ 			new Chart(activationChart, {
+  				type: 'line',
+  				data: activationChartData,
+  				options: {
+    				scales: {
+      					yAxes: [{
+        					ticks: {
+         						beginAtZero: true
+        					}
+      					}]
+    				},
+    				legend: {
+      					display: true,
+						labels: [{
+							fontColor: 'rgb(255, 99, 132)'
+						}]
+    				}
+  				}
+  			});
+		}
+
+		if (needOfWaterChart) {
+			new Chart(needOfWaterChart, {
+				type: 'line',
+				data: needOfWaterChartData,
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true,
+								stepSize: 1
+							}
+						}]
+					},
+					legend: {
+						display: true,
+						labels: [{
+							fontColor: 'rgb(255, 99, 132)'
+						}]
+					}
+				}
+			});
+		}
+	</script>
+
+</body>
+</html>
