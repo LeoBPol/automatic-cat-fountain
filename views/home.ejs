@@ -70,26 +70,31 @@
 
 
     <div class="container container-perso">
-        <form class="row">
+        <div class="row">
             <div class="col-sm">
                 <label>Entrez une ou plusieurs adresses mail pour recevoir un mail lorsqu'il faut remplir la
                     fontaine. </label>
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">E-mail</span>
+                <form action="/manageEmail" method="post">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">E-mail</span>
+                        </div>
+                        <input type="email" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" name="email" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">Ajouter</button>
+                        </div>
                     </div>
-                    <input type="text" class="form-control" aria-label="Default"
-                           aria-describedby="inputGroup-sizing-default">
-                </div>
+                </form>
             </div>
             <div class="col-sm" style="flex-grow:1;position: relative">
                 <div class="mb-2" style="position: absolute;left: 0;right: 0;bottom: 0;top: 0">
                     <label>Email recevant déjà le rappel</label>
                     <% console.log(emails.length) %>
-                    <ul class="list-group" style="margin-left: 10%; margin-right: 10%">
+                    <ul class="list-group" style="margin-right: 15px">
                         <% for(var i = 0; i < emails.length; i++) { %>
                             <li id="<%= emails[i]._id %>" class="list-group-item" value="<%= emails[i]._id %>">
-                                <span id="deleteJury" class="fa fa-times" onclick="test('<%= emails[i]._id %>')"
+                                <span type="button" id="deleteJury" class="fa fa-times" onclick="deletion('<%= emails[i]._id %>')"
                                       style="margin-right: 3%"></span>
                                 <%= emails[i].email %>
                             </li>
@@ -115,7 +120,7 @@
                 </div>
             </div>
 
-        </form>
+        </div>
     </div>
 </main>
 

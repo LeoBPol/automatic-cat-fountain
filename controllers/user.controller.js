@@ -6,11 +6,36 @@ const Email = db.email
 
 exports.loadBoard = (req, res) => {
 
-    Day.find({date: {$gte: new Date(parseInt(req.query.firstDate)), $lte: new Date()}}, function (err, days) {
-        Email.find(function (err, emails){
-            console.log("days on request")
-            console.log(days)
-            res.render('home', {days: days, emails: emails})
-        })
-    })
+    if (req.query.firstDate) {
+        Day.find({date: {$gte: new Date(parseInt(req.query.firstDate)), $lte: new Date()}}, function (err, days) {
+            Email.find(function (err, emails) {
+                res.render('home', {days: days, emails: emails})
+            })
+        }).sort({'date': 1})
+    } else {
+        Day.find(function (err, days) {
+            Email.find(function (err, emails) {
+                res.render('home', {days: days, emails: emails})
+            })
+        }).sort({'date': 1})
+    }
+}
+
+exports.addMail = (req, res) => {
+     const email = new Email({
+         "email": req.body.email
+     })
+
+     email.save(function (err){
+         res.redirect('/')
+     })
+}
+
+exports.remmoveMail = (req, res) => {
+
+    Email.deleteOne({'_id': mongoose.Types.ObjectId(req.query.emailID)}, function (err) {
+        if (err) return console.log(err)
+        res.redirect('/')
+    });
+
 }

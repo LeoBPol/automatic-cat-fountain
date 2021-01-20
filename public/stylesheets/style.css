@@ -47,6 +47,7 @@ header{
 	flex-wrap: nowrap;              /* default value; can be omitted */
 	justify-content: space-between; /* switched from default (flex-start, see below) */
 	width: 100%;
+	overflow-x: hidden;
 }
 form{
 	margin: 1% 5%;
@@ -55,4 +56,5 @@ form{
 	width: 100%;
 	margin-right: 0;
 	margin-left: 0;
+	max-width: 100%;
 }

@@ -8,4 +8,13 @@ router.get('/', function(req, res, next) {
   controller.loadBoard(req, res)
 });
 
+router.delete('/manageEmail', function (req, res, next) {
+  controller.remmoveMail(req, res)
+})
+
+
+router.post('/manageEmail', function (req, res, next) {
+  controller.addMail(req, res)
+})
+
 module.exports = router;
