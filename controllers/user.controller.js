@@ -8,6 +8,8 @@ exports.loadBoard = (req, res) => {
 
     Day.find({date: {$gte: new Date(parseInt(req.query.firstDate)), $lte: new Date()}}, function (err, days) {
         Email.find(function (err, emails){
+            console.log("days on request")
+            console.log(days)
             res.render('home', {days: days, emails: emails})
         })
     })
