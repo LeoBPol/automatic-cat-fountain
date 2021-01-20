@@ -6,7 +6,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose')
 const moment = require("moment")
 
-const url = 'mongodb://127.0.0.1:27017/cat-fountain'
+const url = 'mongodb+srv://db_dev:jU8P6008PCIPLOUz@cluster0.bro9q.mongodb.net/prototype?retryWrites=true&w=majority'
 
 const indexRouter = require('./routes/index');
 
