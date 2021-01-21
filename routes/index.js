@@ -17,4 +17,8 @@ router.post('/manageEmail', function (req, res, next) {
   controller.addMail(req, res)
 })
 
+router.get('/timeFilter', function (req, res) {
+  controller.getData(req, res)
+})
+
 module.exports = router;

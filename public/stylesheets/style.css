@@ -36,6 +36,17 @@ header{
 	transform: translateY(-50%);
 	top: 50%;
 }
+.help-text{
+	float: right;
+	right: 5%;
+	position: absolute;
+	transform: translateY(-50%);
+	top: 50%;
+}
+.inner-help-text{
+	color: rgb(0, 161, 163);
+	font-weight: 500;
+}
 .chart{
 	padding-top: 15px;
 	margin-right: 0;
@@ -48,13 +59,41 @@ header{
 	justify-content: space-between; /* switched from default (flex-start, see below) */
 	width: 100%;
 	overflow-x: hidden;
-}
-form{
-	margin: 1% 5%;
+	overflow-y: hidden;
+	max-height: 60vh;
 }
 .container-perso{
 	width: 100%;
 	margin-right: 0;
 	margin-left: 0;
 	max-width: 100%;
+}
+ul{
+	overflow-y: auto;
+	height: 18vh;
+	padding-right: 5px;
+}
+ul::-webkit-scrollbar {
+	width: 8px;
+}
+
+ul::-webkit-scrollbar-track {
+	background: #e5e5e5;
+	border-radius: 10px;
+}
+
+ul::-webkit-scrollbar-thumb {
+	background: #d0d0d0;
+	border-radius: 10px;
+}
+#timeSelector{
+	font-size: 1.2rem;
+	font-weight: 400;
+	margin-right: 15px;
+	margin-top: -7.5px;
+	margin-bottom: 7.5px;
+}
+option{
+	font-size: 1.2rem;
+	font-weight: 300;
 }

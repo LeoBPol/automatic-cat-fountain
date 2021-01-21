@@ -23,14 +23,17 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
     <title>Automatic cat fountain</title>
 </head>
 <body>
 
 <header>
-    <div>
+    <div style="flex-grow: 1">
         <img src="/images/logo.jpg" id="logo">
         <p id="logo-text">Fontaine à eau pour chat automatisée</p>
+        <p class="help-text">Besoin d'aide ? <a class="inner-help-text" href="mailto:leo.brunet@etu.umontpellier.fr"
+                                                type="button">Contactez-nous</a></p>
     </div>
 
 
@@ -55,7 +58,17 @@
         </div>
 
         <div class="container chart" style="right: 0">
-            <label>Nombre d'activation de la fontaine par jour</label>
+            <div class="row">
+                <label class="col-sm">Nombre d'alerte par jour</label>
+                <select id="timeSelector" class="col-sm">
+                    <option value="0" selected="selected">Toutes les données</option>
+                    <option value="<%= moment().subtract(7, 'days').valueOf() %>">7 derniers jours</option>
+                    <option value="<%= moment().startOf('week').add(1, 'days').valueOf() %>">Cette semaine</option>
+                    <option value="<%= moment().startOf('month').add(1, 'days').valueOf() %>">Ce mois</option>
+                    <option value="<%= moment().startOf('year').add(1, 'days').valueOf() %>">Cette année</option>
+                </select>
+            </div>
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -68,10 +81,9 @@
         </div>
     </div>
 
-
     <div class="container container-perso">
         <div class="row">
-            <div class="col-sm">
+            <div class="col-sm" style="padding: 15px">
                 <label>Entrez une ou plusieurs adresses mail pour recevoir un mail lorsqu'il faut remplir la
                     fontaine. </label>
                 <form action="/manageEmail" method="post">
@@ -87,14 +99,15 @@
                     </div>
                 </form>
             </div>
-            <div class="col-sm" style="flex-grow:1;position: relative">
-                <div class="mb-2" style="position: absolute;left: 0;right: 0;bottom: 0;top: 0">
+            <div class="col-sm" style="padding: 15px">
+                <div class="mb-2" style="">
                     <label>Email recevant déjà le rappel</label>
                     <% console.log(emails.length) %>
-                    <ul class="list-group" style="margin-right: 15px">
+                    <ul class="list-group">
                         <% for(var i = 0; i < emails.length; i++) { %>
                             <li id="<%= emails[i]._id %>" class="list-group-item" value="<%= emails[i]._id %>">
-                                <span type="button" id="deleteJury" class="fa fa-times" onclick="deletion('<%= emails[i]._id %>')"
+                                <span type="button" id="deleteJury" class="fa fa-times"
+                                      onclick="deletion('<%= emails[i]._id %>')"
                                       style="margin-right: 3%"></span>
                                 <%= emails[i].email %>
                             </li>
@@ -133,10 +146,6 @@ for (var i = 0; i < days.length; i++) {
     needOfWater[i] = days[i].needOfWater
     firstDayLetter[i] = moment(days[i].date).format("ddd DD/MM")
 }
-
-console.log(activation)
-console.log(needOfWater)
-console.log(firstDayLetter)
 %>
 
 <script type="text/javascript">
@@ -150,57 +159,140 @@ console.log(firstDayLetter)
     let activationChartData = {
         labels: '<%= firstDayLetter %>'.split(','),
         datasets: [{
+            borderColor: "rgb(0, 161, 163)",
+            borderWidth: "1.5",
+            pointBackgroundColor: "rgb(0, 161, 163)",
+            pointBorderColor: "rgb(0, 161, 163)",
+            pointHoverBackgroundColor: "rgb(0, 161, 163)",
+            pointHoverBorderColor: "rgb(0, 161, 163)",
             data: '<%= activation %>'.split(','),
         }]
     };
     let needOfWaterChartData = {
         labels: '<%= firstDayLetter %>'.split(','),
         datasets: [{
+            borderColor: "rgb(0, 161, 163)",
+            borderWidth: "1.5",
+            pointBackgroundColor: "rgb(0, 161, 163)",
+            pointBorderColor: "rgb(0, 161, 163)",
+            pointHoverBackgroundColor: "rgb(0, 161, 163)",
+            pointHoverBorderColor: "rgb(0, 161, 163)",
             data: '<%= needOfWater %>'.split(','),
         }]
     };
 
-    if (activationChart) {
-        new Chart(activationChart, {
-            type: 'line',
-            data: activationChartData,
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
-                legend: {
-                    display: true,
-                    labels: [{
-                        fontColor: 'rgb(255, 99, 132)'
-                    }]
-                }
-            }
-        });
-    }
 
-    if (needOfWaterChart) {
-        new Chart(needOfWaterChart, {
-            type: 'line',
-            data: needOfWaterChartData,
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1
-                        }
-                    }]
-                },
-                legend: {
-                    display: true,
-                    labels: [{
-                        fontColor: 'rgb(255, 99, 132)'
-                    }]
+    let chartActivation = new Chart(activationChart, {
+        type: 'line',
+        data: activationChartData,
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            legend: {
+                display: true,
+                labels: [{
+                    fontColor: 'rgb(255, 99, 132)'
+                }]
+            },
+
+        }
+    });
+
+    let chartNeedOfWater =  new Chart(needOfWaterChart, {
+        type: 'line',
+        data: needOfWaterChartData,
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }]
+            },
+            legend: {
+                display: true,
+                labels: [{
+                    fontColor: 'rgb(255, 99, 132)'
+                }]
+            }
+        }
+    });
+
+</script>
+
+<script type="text/javascript">
+    document.getElementById("timeSelector").addEventListener('change', function () {
+        console.log(this.value)
+        getNewDatas(this.value)
+    })
+
+    function getNewDatas(firstDate) {
+        let activationChartData
+        let needOfWaterChartData
+
+        console.log(firstDate)
+        $.ajax({
+            type: 'get',
+            url: '/timeFilter?firstDate=' + firstDate,
+            dataType: 'json',
+            success: function (days, statut) {
+                console.log("days")
+                console.log(days)
+
+                let activationDatas = []
+                let needOfWaterDatas = []
+                let firstDayLetter = []
+
+                for (let i = 0; i < days.length; i++) {
+                    activationDatas[i] = days[i].activation
+                    needOfWaterDatas[i] = days[i].needOfWater
+                    firstDayLetter[i] = moment(days[i].date).format("ddd DD/MM")
                 }
+
+                console.log("newData")
+                console.log(activationDatas)
+                console.log(needOfWaterDatas)
+                console.log(firstDayLetter)
+
+                activationChartData = {
+                    labels: '<%= firstDayLetter %>'.split(','),
+                    datasets: [{
+                        borderColor: "rgb(0, 161, 163)",
+                        borderWidth: "1.5",
+                        pointBackgroundColor: "rgb(0, 161, 163)",
+                        pointBorderColor: "rgb(0, 161, 163)",
+                        pointHoverBackgroundColor: "rgb(0, 161, 163)",
+                        pointHoverBorderColor: "rgb(0, 161, 163)",
+                        data: activationDatas,
+                    }]
+                };
+                needOfWaterChartData = {
+                    labels: '<%= firstDayLetter %>'.split(','),
+                    datasets: [{
+                        borderColor: "rgb(0, 161, 163)",
+                        borderWidth: "1.5",
+                        pointBackgroundColor: "rgb(0, 161, 163)",
+                        pointBorderColor: "rgb(0, 161, 163)",
+                        pointHoverBackgroundColor: "rgb(0, 161, 163)",
+                        pointHoverBorderColor: "rgb(0, 161, 163)",
+                        data: needOfWaterDatas,
+                    }]
+                };
+
+                chartNeedOfWater.data.labels = firstDayLetter
+                chartNeedOfWater.data.datasets[0].data = needOfWaterDatas
+                chartNeedOfWater.update()
+
+                chartActivation.data.labels = firstDayLetter
+                chartActivation.data.datasets[0].data = activationDatas
+                chartActivation.update()
+
             }
         });
     }

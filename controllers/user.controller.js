@@ -39,3 +39,16 @@ exports.remmoveMail = (req, res) => {
     });
 
 }
+
+exports.getData = (req, res) => {
+
+    console.log("req.query.firstDate")
+    console.log(req.query)
+    console.log(req.query.firstDate)
+    console.log(new Date(parseInt(req.query.firstDate)))
+
+    Day.find({date: {$gte: new Date(parseInt(req.query.firstDate)), $lte: new Date()}}, function (err, days) {
+        res.json(days)
+    }).sort({'date': 1})
+
+}
